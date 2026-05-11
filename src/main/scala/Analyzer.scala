@@ -2,6 +2,7 @@
 // Ejercicios 3 y 5: Detección y conteo de entidades
 // =====================================================================
 
+import scala.util.matching.Regex
 /**
  * Responsable de detectar entidades nombradas en texto libre y
  * producir estadísticas sobre ellas.
@@ -35,7 +36,10 @@ object Analyzer {
    *                  )
    */
   def detectEntities(text: String, dictionary: List[NamedEntity]): List[NamedEntity] = {
-    dictionary.filter(text contains _.getText)
+    dictionary.filter {s =>
+      val regex = ("(?i)(?<!\\p{L})" + Regex.quote(s.getText) + "(?!\\p{L})").r
+      regex.findFirstIn(text).isDefined
+    }
   }
 
   /**
