@@ -27,6 +27,8 @@ abstract class NamedEntity(val text: String) {
    * subclase sin necesidad de redefinirlo. Esto es polimorfismo.
    */
   def describe: String = s"[$entityType] $text"
+
+  def getText: String = text
 }
 
 // =====================================================================
