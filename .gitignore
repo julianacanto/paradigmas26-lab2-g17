@@ -42,3 +42,64 @@ bin/
 
 # general
 *.class
+
+# --- Entornos virtuales ---
+.venv/
+venv/
+env/
+.conda/
+.venv*/
+venv*/
+env*/
+
+# --- Paquetes y build ---
+build/
+dist/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+
+# --- Tests / cobertura ---
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# --- Herramientas de análisis ---
+.mypy_cache/
+.pytype/
+.ruff_cache/
+.pyre/
+.dmypy.json
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- Configs locales / IDE ---
+.idea/
+.spyproject/
+*.code-workspace
+
+# --- Archivos temporales / sistema (including macOS metadata) ---
+._*                        
+Thumbs.db
+*.swp
+*.swo
+*.orig
+~$*
+
+# --- Setup personal ---
+setup.txt
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Variables de entorno / credenciales (ajusta según tu proyecto) ---
+.env
+.env.*
+*.env
+*.secret
+secrets.toml
