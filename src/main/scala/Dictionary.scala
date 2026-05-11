@@ -2,6 +2,8 @@
 // Ejercicio 2: Cargar diccionarios de entidades
 // =====================================================================
 
+import scala.io.Source
+
 /**
  * Responsable de cargar colecciones de entidades nombradas desde archivos.
  *
@@ -38,7 +40,46 @@ object Dictionary {
    *
    */
   def loadFromFile(filePath: String, entityType: String): List[NamedEntity] = {
-    ???
+
+    val source = Source.fromFile(filePath)
+    try {
+
+      val lines =
+        source
+          .getLines()
+          .toList
+          .map(_.trim)
+          .filter(line =>
+            line.nonEmpty &&
+            !line.startsWith("#")
+          )
+
+      val entities = lines.map { line =>
+
+        entityType match {
+
+          case "Person" =>
+            new Person(line)
+
+          case "University" =>
+            new University(line)
+
+          case "ProgrammingLanguage" =>
+            new ProgrammingLanguage(line)
+
+          case "Organization" =>
+            new Organization(line)
+
+          case "Place" =>
+            new Place(line)
+        }
+      }
+
+      entities
+
+    } finally {
+      source.close()
+    }
   }
 
   /**
@@ -50,6 +91,42 @@ object Dictionary {
    *
    */
   def loadAll(): List[NamedEntity] = {
-    ???
+
+    val people =
+      loadFromFile(
+        "data/people.txt",
+        "Person"
+      )
+
+    val universities =
+      loadFromFile(
+        "data/universities.txt",
+        "University"
+      )
+
+    val languages =
+      loadFromFile(
+        "data/languages.txt",
+        "ProgrammingLanguage"
+      )
+
+    val organizations =
+      loadFromFile(
+        "data/organizations.txt",
+        "Organization"
+      )
+
+    val places =
+      loadFromFile(
+        "data/places.txt",
+        "Place"
+      )
+
+    people ++
+    universities ++
+    languages ++
+    organizations ++
+    places
   }
 }
+
