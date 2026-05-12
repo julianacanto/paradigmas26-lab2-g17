@@ -65,6 +65,24 @@ object Analyzer {
    *                 )
    */
   def countByType(entities: List[NamedEntity]): Map[String, Int] = {
-    ???
+    entities
+      .groupBy(entity => entity.entityType)
+      .map { case (entityType, list) =>
+        (entityType, list.size)
+      }
   }
 }
+/*  
+object TestCountBy extends App {
+  val entities = List(
+    new Person("Alan Turing"),
+    new ProgrammingLanguage("Scala"),
+    new Person("Ada Lovelace"),
+    new University("MIT")
+  )
+
+  val result = Analyzer.countByType(entities)
+
+  println(result)
+}
+*/
