@@ -37,7 +37,8 @@ object Analyzer {
    */
   def detectEntities(text: String, dictionary: List[NamedEntity]): List[NamedEntity] = {
     dictionary.filter {s =>
-      val regex = ("(?i)(?<!\\p{L})" + Regex.quote(s.getText) + "(?!\\p{L})").r
+      val entityText = s.describe.split(" ")(1) // Obtiene el texto a partir de la descripción, para no romper el encapsulamiento
+      val regex = ("(?i)(?<!\\p{L})" + Regex.quote(entityText) + "(?!\\p{L})").r
       regex.findFirstIn(text).isDefined
     }
   }
