@@ -39,46 +39,30 @@ object Dictionary {
    *   Para crear la clase correcta según el tipo se puede usar match:
    *
    */
+
   def loadFromFile(filePath: String, entityType: String): List[NamedEntity] = {
 
-    val source = Source.fromFile(filePath)
-    try {
+    val lines = FileIO.readLines(filePath)
 
-      val lines =
-        source
-          .getLines()
-          .toList
-          .map(_.trim)
-          .filter(line =>
-            line.nonEmpty &&
-            !line.startsWith("#")
-          )
+    lines.map { line =>
 
-      val entities = lines.map { line =>
+      entityType match {
 
-        entityType match {
+        case "Person" =>
+          new Person(line)
 
-          case "Person" =>
-            new Person(line)
+        case "University" =>
+          new University(line)
 
-          case "University" =>
-            new University(line)
+        case "ProgrammingLanguage" =>
+          new ProgrammingLanguage(line)
 
-          case "ProgrammingLanguage" =>
-            new ProgrammingLanguage(line)
+        case "Organization" =>
+          new Organization(line)
 
-          case "Organization" =>
-            new Organization(line)
-
-          case "Place" =>
-            new Place(line)
-        }
+        case "Place" =>
+          new Place(line)
       }
-
-      entities
-
-    } finally {
-      source.close()
     }
   }
 
