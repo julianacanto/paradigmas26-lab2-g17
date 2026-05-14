@@ -38,7 +38,6 @@ class Organization(text: String) extends NamedEntity(text) {
   def entityType: String = "Organization" 
 }
 
-// subclase
 class University(text: String) extends Organization(text) {
   override def entityType: String = "University"
 }
@@ -51,7 +50,6 @@ class Technology(text: String) extends NamedEntity(text) {
   def entityType: String = "Technology"
 }
 
-// subclase
 class ProgrammingLanguage(text: String) extends Technology(text) {
   override def entityType: String = "ProgrammingLanguage"
 }

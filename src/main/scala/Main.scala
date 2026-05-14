@@ -9,7 +9,7 @@ object Main {
     // Paso 1: Cargar diccionarios
     // ------------------------------------------------------------------
     // TODO (Ejercicio 2)
-    val dictionary: List[NamedEntity] = ???
+    val dictionary: List[NamedEntity] = Dictionary.loadAll()
 
     println(s"Diccionario cargado: ${dictionary.size} entidades.\n")
 
@@ -33,6 +33,16 @@ object Main {
     //     1. Detectar entidades
     //     2. Formatear y mostrar el resultado
 
+  val allEntities: List[NamedEntity] = 
+    allPosts.flatMap{ case(url, titles) =>
+      println(s"\n==Posts de: $url==\n")
+      titles.flatMap { title =>
+      val detectedEntities = Analyzer.detectEntities(title, dictionary)
+      println(Formatters.formatNERResult(title, detectedEntities))      
+      detectedEntities
+      }
+    }
+
     // ------------------------------------------------------------------
     // Paso 4: Estadísticas globales
     // ------------------------------------------------------------------
@@ -41,5 +51,7 @@ object Main {
     //   2. Contar por tipo
     //   3. Mostrar el resumen
 
+  val allCounts: Map[String, Int] = Analyzer.countByType(allEntities)
+  println(Formatters.formatEntityStats(allCounts))
   }
 }

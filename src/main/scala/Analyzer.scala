@@ -43,6 +43,20 @@ object Analyzer {
     }
   }
 
+  // CASO BORDE mal detectado:
+  // Post: New? READ ME FIRST! 
+  // Entidades detectadas: [Place] New York
+
+  // Alternativa
+  // def detectEntities(text: String, dictionary: List[NamedEntity]): List[NamedEntity] = {
+  // dictionary.filter { e =>
+  //   val entityText = e.text.trim
+  //   val regex = ("(?i)(?<!\\p{L})" + Regex.quote(entityText) + "(?!\\p{L})").r
+  //   regex.findFirstIn(text).isDefined
+  // }
+  // }
+
+
   /**
    * Cuenta cuántas entidades de cada tipo fueron detectadas.
    *

@@ -32,7 +32,7 @@ object Formatters {
    */
   def formatNERResult(postTitle: String, entities: List[NamedEntity]): String = {
     val descripciones = entities.map("\n  " + _.describe).mkString
-    if (descripciones == "") s"Post: $postTitle\n  (no se detectaron entidades)"
+    if (descripciones == "") s"Post: $postTitle\n  (sin entidades detectadas)"
     else s"Post: $postTitle\nEntidades detectadas:$descripciones"
   }
 
@@ -60,7 +60,7 @@ object Formatters {
     }
     .mkString("\n")
 
-  s"=== Estadísticas de entidades ===\n$stats"
+  s"\n=== Estadísticas de entidades ===\n$stats"
   }
 }
 
