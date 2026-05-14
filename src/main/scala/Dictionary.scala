@@ -62,6 +62,9 @@ object Dictionary {
 
         case "Place" =>
           new Place(line)
+
+        case "Technology" =>
+          new Technology(line)  
       }
     }
   }
