@@ -36,25 +36,12 @@ object Analyzer {
    *                  )
    */
   def detectEntities(text: String, dictionary: List[NamedEntity]): List[NamedEntity] = {
-    dictionary.filter {s =>
-      val entityText = s.describe.split(" ")(1) // Obtiene el texto a partir de la descripción, para no romper el encapsulamiento
+    dictionary.filter { e =>
+      val entityText = e.text.trim
       val regex = ("(?i)(?<!\\p{L})" + Regex.quote(entityText) + "(?!\\p{L})").r
       regex.findFirstIn(text).isDefined
     }
   }
-
-  // CASO BORDE mal detectado:
-  // Post: New? READ ME FIRST! 
-  // Entidades detectadas: [Place] New York
-
-  // Alternativa
-  // def detectEntities(text: String, dictionary: List[NamedEntity]): List[NamedEntity] = {
-  // dictionary.filter { e =>
-  //   val entityText = e.text.trim
-  //   val regex = ("(?i)(?<!\\p{L})" + Regex.quote(entityText) + "(?!\\p{L})").r
-  //   regex.findFirstIn(text).isDefined
-  // }
-  // }
 
 
   /**
