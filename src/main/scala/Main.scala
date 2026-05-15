@@ -35,7 +35,7 @@ object Main {
 
   val allEntities: List[NamedEntity] = 
     allPosts.flatMap{ case(url, titles) =>
-      println(s"\n==Posts de: $url==\n")
+      println(s"\n== Posts de: $url ==\n")
       titles.flatMap { title =>
       val detectedEntities = Analyzer.detectEntities(title, dictionary)
       println(Formatters.formatNERResult(title, detectedEntities))      
